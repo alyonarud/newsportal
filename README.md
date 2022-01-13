@@ -116,9 +116,28 @@ a.update_rating()
 
 a.ratingAuthor
 
+8
+
 b = Author.objects.get(id = 2)
 
 b.update_rating()
 
 b.ratingAuthor
+
+9
+
+9.	Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
+
+>>> best_post = Post.objects.order_by('-rating')[:1]
+
+>>> best_authors = Author.objects.order_by('-ratingAuthor')[:1]
+
+>>> best_authors[0].authorUser.username
+
+'Alisa'
+
+>>> best_authors[0].ratingAuthor
+
+9
+
 
