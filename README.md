@@ -109,6 +109,7 @@ Comment.objects.get(id = 4).dislike()
 Comment.objects.get(id = 4).rating
 
 8.	Обновить рейтинги пользователей.
+
 a = Author.objects.get(id = 1)
 
 a.update_rating()
