@@ -22,6 +22,7 @@ class Author(models.Model): #User AbstractUser
         commentRat = self.authorUser.comment_set.aggregate(commentRating=Sum('rating'))
         cRat = 0
         cRat += commentRat.get('commentRating')
+
         self.ratingAuthor = pRat *3 + cRat
         self.save()
 
@@ -73,7 +74,7 @@ class Post(models.Model):
     def preview(self):
         #return '{}…{}'.format(self.text[0..123],'...')
         return self.text[0:123] + '...'
-        self.text[0:123]
+
 
 
 # 4.	Модель PostCategory
@@ -147,3 +148,11 @@ class Comment(models.Model):
 #Post.objects.get(id = 1).dislike()
 #Post.objects.get(id = 1).dislike()
 #Post.objects.get(id = 1).rating
+
+#a = Author.objects.get(id = 1)
+#a.update_rating()
+#a.ratingAuthor
+
+# b = Author.objects.get(id = 2)
+
+#Comment.objects.create(commentPost= Post.objects.get(id = 1), commentUser = Author.objects.get(id = 1).authorUser, text = 'Спасибо за отзыв!')
