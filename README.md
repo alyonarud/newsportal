@@ -174,3 +174,20 @@ datetime.datetime(2022, 1, 13, 19, 37, 56, 814926, tzinfo=datetime.timezone.utc)
 
 'В связи со стабилизацией ситуации в Казахстане мероприятия по вывозу граждан России самолетами Минобороны завершаются, гово...'
 
+
+11.	Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
+
+
+
+#вывод вообще всех комментариев, отсортированных по рейтингу
+
+Comment.objects.all().order_by('-rating').values('dateCreation', 'commentUser', 'rating', 'text')
+
+#Вывод всех комментариев (дата, пользователь, рейтинг, текст) к этой статье (best_post[0]).
+
+>>> Comment.objects.filter(commentPost = best_post[0]).order_by('-rating').values('dateCreation', 'commentUser', 'rating', 'text')
+<QuerySet [{'dateCreation': datetime.datetime(2022, 1, 13, 20, 31, 56, 600289, tzinfo=datetime.timezone.utc), 'commentUser': 2, 'rating': -1, 'text': 'Ура, лечу'}]>
+>>>
+
+
+
