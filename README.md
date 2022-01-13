@@ -32,16 +32,22 @@ Post.objects.get(id = 2).postCategory.add(Category.objects.get(id = 3))
 
 # присвоили новости 3 категории SOC, POLIT
 Post.objects.get(id = 3).postCategory.add(Category.objects.get(id = 3))
+
 Post.objects.get(id = 3).postCategory.add(Category.objects.get(id = 2))
 
 6.	Создать как минимум 4 комментария к разным объектам модели Post (в каждом объекте должен быть как минимум один комментарий).
+	
 Comment.objects.create(commentPost= Post.objects.get(id = 1), commentUser = Author.objects.get(id = 2).authorUser, text = 'Интересная статья, спасибо!')
+
 Comment.objects.create(commentPost= Post.objects.get(id = 1), commentUser = Author.objects.get(id = 1).authorUser, text = 'Спасибо за отзыв!')
+
 Comment.objects.create(commentPost= Post.objects.get(id = 2), commentUser = Author.objects.get(id = 1).authorUser, text = 'Интересная статья, жду продолжение!')
+
 Comment.objects.create(commentPost= Post.objects.get(id = 3), commentUser = Author.objects.get(id = 2).authorUser, text = 'Ура, лечу')
 
 
 7.	Применяя функции like() и dislike() к статьям/новостям и комментариям, скорректировать рейтинги этих объектов.
+	
 Comment.objects.get(id = 1).like()
 Comment.objects.get(id = 1).rating
 Post.objects.get(id = 1).like()
