@@ -143,9 +143,34 @@ b.ratingAuthor
 10.	Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье.
 
 >>> best_post = Post.objects.order_by('-rating')[:1]
+
+>>> best_post[0].dateCreation
+
+или
+
 >>> Post.objects.get(id=best_post).dateCreation
+
 datetime.datetime(2022, 1, 13, 19, 37, 56, 814926, tzinfo=datetime.timezone.utc)
 
+
+
+>>> best_post[0].author.authorUser.username
+
+или
+
+>>> Post.objects.get(id=best_post).author.authorUser.username
+
+'Alyona'
+
 >>> best_post[0].rating
+
 4
+
+>>> best_post[0].title
+
+' Из Алма-Аты возобновили пассажирские рейсы с 13 января'
+
+>>> best_post[0].preview()
+
+'В связи со стабилизацией ситуации в Казахстане мероприятия по вывозу граждан России самолетами Минобороны завершаются, гово...'
 
