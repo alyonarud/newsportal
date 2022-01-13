@@ -128,7 +128,6 @@ b.ratingAuthor
 
 9.	Вывести username и рейтинг лучшего пользователя (применяя сортировку и возвращая поля первого объекта).
 
->>> best_post = Post.objects.order_by('-rating')[:1]
 
 >>> best_authors = Author.objects.order_by('-ratingAuthor')[:1]
 
@@ -140,4 +139,13 @@ b.ratingAuthor
 
 9
 
+
+10.	Вывести дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье.
+
+>>> best_post = Post.objects.order_by('-rating')[:1]
+>>> Post.objects.get(id=best_post).dateCreation
+datetime.datetime(2022, 1, 13, 19, 37, 56, 814926, tzinfo=datetime.timezone.utc)
+
+>>> best_post[0].rating
+4
 
