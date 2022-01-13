@@ -11,6 +11,7 @@ u1 = User.objects.create_user('Alyona', 'alyona@mail.ru', 'alyonapass')
 u2 = User.objects.create_user('Alisa', 'alisa@mail.ru', 'alisapass')
 
 2.	Создать два объекта модели Author, связанные с пользователями.
+
 Author.objects.create(authorUser = u1)
 
 Author.objects.create(authorUser = u2)
@@ -183,7 +184,13 @@ datetime.datetime(2022, 1, 13, 19, 37, 56, 814926, tzinfo=datetime.timezone.utc)
 
 #вывод вообще всех комментариев, отсортированных по рейтингу
 
-Comment.objects.all().order_by('-rating').values('dateCreation', 'commentUser', 'rating', 'text')
+>>> Comment.objects.all().order_by('-rating').values('dateCreation', 'commentUser', 'rating', 'text')
+
+<QuerySet [{'dateCreation': datetime.datetime(2022, 1, 13, 14, 40, 43, 231720, tzinfo=datetime.timezone.utc), 'commentUser': 2, 'rating': 1, 'text': 'Интересная статья, спасибо!'}, {'date
+Creation': datetime.datetime(2022, 1, 13, 19, 30, 0, 657397, tzinfo=datetime.timezone.utc), 'commentUser': 1, 'rating': 1, 'text': 'Спасибо за отзыв!'}, {'dateCreation': datetime.datetime
+(2022, 1, 13, 20, 31, 30, 973086, tzinfo=datetime.timezone.utc), 'commentUser': 1, 'rating': 1, 'text': 'Интересная статья, жду продолжение!'}, {'dateCreation': datetime.datetime(2022, 1,
+ 13, 20, 31, 56, 600289, tzinfo=datetime.timezone.utc), 'commentUser': 2, 'rating': -1, 'text': 'Ура, лечу'}]>
+
 
 #Вывод всех комментариев (дата, пользователь, рейтинг, текст) к этой статье (best_post[0]).
 
