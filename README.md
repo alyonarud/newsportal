@@ -48,6 +48,11 @@ Post.objects.get(id = 3).postCategory.add(Category.objects.get(id = 3))
 
 Post.objects.get(id = 3).postCategory.add(Category.objects.get(id = 2))
 
+# получить список всех категорий поста:
+Post.objects.get(id = 3).postCategory.all()
+
+<QuerySet [<Category: Category object (3)>, <Category: Category object (2)>]>
+
 6.	Создать как минимум 4 комментария к разным объектам модели Post (в каждом объекте должен быть как минимум один комментарий).
 	
 Comment.objects.create(commentPost= Post.objects.get(id = 1), commentUser = Author.objects.get(id = 2).authorUser, text = 'Интересная статья, спасибо!')
