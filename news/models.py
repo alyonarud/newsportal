@@ -15,15 +15,33 @@ class Author(models.Model): #User AbstractUser
     authorUser = models.OneToOneField(User, on_delete= models.CASCADE)
     ratingAuthor = models.SmallIntegerField(default=0)
 
-    def update_rating(self):
-        postRat = self.post_set.aggregate(postRating = Sum('rating'))
-        pRat = 0
-        pRat += postRat.get('postRating')
-        commentRat = self.authorUser.comment_set.aggregate(commentRating=Sum('rating'))
-        cRat = 0
-        cRat += commentRat.get('commentRating')
+    #def update_rating(self):
+    #  postRat = self.post_set.aggregate(postRating = Sum('rating'))
+    #  pRat = 0
+    #  pRat += postRat.get('postRating')
+    #  commentRat = self.authorUser.comment_set.aggregate(commentRating=Sum('rating'))
+    #  cRat = 0
+    #   cRat += commentRat.get('rating') if commentRat else 0
 
-        self.ratingAuthor = pRat *3 + cRat
+    #   self.ratingAuthor = pRat *3 + cRat
+    #   self.save()
+
+    def update_rating(self): # с проверкой,не пустой ли рейтинг
+        postRat = self.post_set.all() or 0
+        if postRat:
+            postRat = postRat.aggregate(rating=Sum('rating'))
+
+        pRat = 0
+        pRat += postRat.get('rating') if postRat else 0
+
+        commentRat = self.user.comment_set.all() or 0
+        if commentRat:
+            commentRat = commentRat.aggregate(rating=Sum('rating'))
+
+        cRat = 0
+        cRat += commentRat.get('rating') if commentRat else 0
+
+        self.rating = pRat * 3 + cRat
         self.save()
 
 
@@ -149,10 +167,6 @@ class Comment(models.Model):
 #Post.objects.get(id = 1).dislike()
 #Post.objects.get(id = 1).rating
 
-#a = Author.objects.get(id = 1)
-#a.update_rating()
-#a.ratingAuthor
 
-# b = Author.objects.get(id = 2)
 
 #Comment.objects.create(commentPost= Post.objects.get(id = 1), commentUser = Author.objects.get(id = 1).authorUser, text = 'Спасибо за отзыв!')
